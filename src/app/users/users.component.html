@@ -1,0 +1,85 @@
+<p>users works!</p>
+<p>users works!</p>
+<div>
+    <div class="container box_1">
+        <div class="header">
+            Employee List 
+        </div>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search by name" aria-label="Search" [(ngModel)]='search' (ngModelChange)='searchdataByName()'
+                aria-describedby="basic-addon1">
+        </div>
+        <select class="custom-select" style='width: 200px;' [(ngModel)]='selectedYears'
+            (change)='changeSelector($event)'>
+            <option value=0>All</option>
+            <option value=2>Candidates more than 2+</option>
+        </select>
+      
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Joining Date</th>
+                    <th>Experience(in years)</th>
+                </tr>
+            </thead>
+            <tbody *ngFor='let user of usersData'>
+                <tr>
+                    <td>{{user.name}}</td>
+                    <td>{{user.department}}</td>
+                    <td>{{user.joining_date}}</td>
+                    <td>{{getYearsOfExp(user.joining_date)}}+</td>
+                </tr>
+            </tbody>
+           
+        </table>
+        <div style='text-align: center;' *ngIf='usersData.length <=0' >
+            No Results Found
+    </div>
+    </div>
+
+
+    <div class="container box_1">
+        <div class='header'>
+            Employee List Otherthan Development
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Joining Date</th>
+                    <!-- <th>Status</th> -->
+                </tr>
+            </thead>
+            <tbody *ngFor='let user of getCandidatesOtherThanDevelopment("Development")'>
+                <tr>
+                    <td>{{user.name}}</td>
+                    <td>{{user.department}}</td>
+                    <td>{{user.joining_date}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container box_1" style ='margin-top: 30px;'>
+        <div class='header'>
+            Department wise count
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Department</th>
+                    <th>Candidates Count</th>
+                </tr>
+            </thead>
+            <tbody *ngFor='let user of departmentCount'>
+                <tr>
+                    <td>{{user.department}}</td>
+                    <td>{{user.count}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
